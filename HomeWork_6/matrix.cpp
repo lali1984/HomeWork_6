@@ -42,15 +42,10 @@ const int Matrix::GetCol() const
 	return col_;
 }
 
-std::vector<int>::iterator& Matrix::getItRow(unsigned numRow) 
-{
-	itRow_ = matrix_.begin() + (numRow * col_);
-	return itRow_;
-}
-
 std::vector<int>::iterator& Matrix::operator[](unsigned numCol) 
 {
-	return 	getItRow(numCol);
+	itRow_ = matrix_.begin() + (numCol * col_);
+	return itRow_;
 }
 
 Matrix& Matrix::operator=(const Matrix& that)
@@ -60,15 +55,22 @@ Matrix& Matrix::operator=(const Matrix& that)
 	matrix_ = that.matrix_;
 	itRow_ = that.itRow_;
 	return *this;
-}
+}//+
 
 Matrix& Matrix::operator+=(int num)
 {
 	for (auto& m : matrix_) {
 		m = m + num;
 	}
+
 	return *this;
-}
+}//+
+
+Matrix Matrix::operator+(int num)
+{
+	Matrix m = *this;
+	return m += num;
+}//+
 
 Matrix& Matrix::operator+=(const Matrix& m2)
 {
@@ -77,31 +79,31 @@ Matrix& Matrix::operator+=(const Matrix& m2)
 		m += m2.matrix_[i];
 		++i;
 	}
-	return *this;
-}
 
-Matrix Matrix::operator+(int num)
-{
-	Matrix m = *this;
-	*this += num;
-	return m ;
-}
+	return *this;
+}//+
 
 Matrix Matrix::operator+(Matrix& m)
 {
-	m = *this;
-	*this += m;
-	return m;
-
-}
+	Matrix m1;
+	m1 = *this;
+	return m1 += m;
+}//+
 
 Matrix& Matrix::operator-=(int num)
 {
 	for (auto& m : matrix_) {
 		m = m - num;
 	}
+
 	return *this;
-}
+}//+
+
+Matrix Matrix::operator-(int num)
+{
+	Matrix m = *this;
+	return m -= num;
+}//+
 
 Matrix& Matrix::operator-=(const Matrix& m2)
 {
@@ -110,23 +112,16 @@ Matrix& Matrix::operator-=(const Matrix& m2)
 		m -= m2.matrix_[i];
 		++i;
 	}
-	return *this;
-}
 
-Matrix Matrix::operator-(int num)
-{
-	Matrix m = *this;
-	*this -= num;
-	return m;
-}
+	return *this;
+}//+
 
 Matrix Matrix::operator-(Matrix& m)
 {
-	m = *this;
-	*this -= m;
-	return m;
-
-}
+	Matrix m1;
+	m1 = *this;
+	return m1 -= m;
+}//+
 
 Matrix& Matrix::operator++() 
 {
@@ -135,7 +130,7 @@ Matrix& Matrix::operator++()
 	}
 
 	return *this;
-}
+}//+
 
 Matrix& Matrix::operator--()
 {
@@ -144,21 +139,21 @@ Matrix& Matrix::operator--()
 	}
 
 	return *this;
-}
+}//+
 
 Matrix Matrix::operator++(int)
 {
 	Matrix m = (*this);
 	++(*this);
 	return m;
-}
+}//+
 
 Matrix Matrix::operator--(int)
 {
 	Matrix m = (*this);
 	--(*this);
 	return m;
-}
+}//+
 
 Matrix& Matrix::operator*=(Matrix& m2)
 {
@@ -172,14 +167,16 @@ Matrix& Matrix::operator*=(Matrix& m2)
 				}
 		}
 	}
+
 	*this = mul;
 	return *this;
-}
+}//+
 
 Matrix Matrix::operator*(Matrix& m2)
 {
-	return *this *= m2;
-}
+	Matrix m = *this;
+	return m *= m2;
+}//+
 
 std::ostream& operator<<(std::ostream& op, Matrix& that)
 {
@@ -187,11 +184,12 @@ std::ostream& operator<<(std::ostream& op, Matrix& that)
 		for (int j = 0; j < that.GetCol(); ++j) {
 			op << std::setw(3) << that[i][j];
 		}
+
 		std::cout << "\n";
 	}
 
 	return op;
-}
+}//+
 
 std::istream& operator>>(std::istream& in, Matrix& that)
 {
@@ -202,7 +200,7 @@ std::istream& operator>>(std::istream& in, Matrix& that)
 	}
 
 	return in;
-}
+}//+
 
 bool operator==(const Matrix& m1, const Matrix& m2)
 {
@@ -210,9 +208,9 @@ bool operator==(const Matrix& m1, const Matrix& m2)
 		return true;
 	else
 		return false;
-}
+}//+
 
 bool operator!=(const Matrix& m1, const Matrix& m2)
 {
 	return !(m1 == m2);
-}
+}//+

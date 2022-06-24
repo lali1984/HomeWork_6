@@ -17,38 +17,58 @@
 
 int main()
 {
-	Matrix matrix1(3, 3);
-	Matrix matrix2(3, 3);
-	for (int i = 0; i < matrix1.GetRow(); ++i) {
-		for (int j = 0; j < matrix1.GetCol(); ++j) {
-			matrix1[i][j] = i;
+	Matrix m1(3, 3);
+	Matrix m2(3, 3);
+	Matrix m3(3, 3);
+	int n = 1;
+	for (int i = 0; i < m1.GetRow(); ++i) {
+		for (int j = 0; j < m1.GetCol(); ++j) {
+			m1[i][j] = i;
+			n++;
 		}
 	}
 
-	for (int i = 0; i < matrix2.GetRow(); ++i) {
-		for (int j = 0; j < matrix2.GetCol(); ++j) {
-			matrix2[i][j] = j;
+	for (int i = 0; i < m2.GetRow(); ++i) {
+		for (int j = 0; j < m2.GetCol(); ++j) {
+			m2[i][j] = j;
 		}
 	}
-	std::cout << "matrix1:\n" << matrix1 << "\nmatrix2:\n" << matrix2;
 
-	if (matrix1.GetCol() == matrix2.GetCol() && matrix1.GetRow() == matrix2.GetCol())
-		matrix1 += matrix2;
-	std::cout << "matrix1 + matrix2:\n" << matrix1;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2;
 
-	if (matrix1.GetRow() == matrix2.GetCol())
-		matrix1 *= matrix2;
-	std::cout << "matrix1 *= matrix2:\n" << matrix1;
+	m2 = m1;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2;
 
-	if (matrix1.GetCol() == matrix2.GetCol() && matrix1.GetRow() == matrix2.GetCol())
-		matrix1 -= matrix2;
-	std::cout << "matrix1 - matrix2:\n" << matrix1;
+	m1 += 1;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2;
 
-	++matrix1;
-	std::cout << "++matrix1:\n" << matrix1;
+	m3 = m1 + 4;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2 << "\nmatrix3:\n" << m3;
+
+	m1 += m2;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2;
+
+	m3 = m1 + m2;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2 << "\nmatrix3:\n" << m3;
+
+	m1 -= 1;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2;
+
+	m3 = m1 - 1;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2 << "\n matrix3:\n" << m3;
 	
-	--matrix1;
-	std::cout << "--matrix1:\n" << matrix1;
+	m1 -= m2;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2;
 
+	m1 *= m2;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2;
 
+	m3 = m1 * m2;
+	std::cout << "matrix1:\n" << m1 << "\nmatrix2:\n" << m2 << "\n matrix3:\n" << m3;
+
+	++m1;
+	std::cout << "++matrix1:\n" << m1;
+	
+	--m1;
+	std::cout << "--matrix1:\n" << m1;
 }
