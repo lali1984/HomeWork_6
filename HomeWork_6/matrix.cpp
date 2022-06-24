@@ -42,9 +42,9 @@ const int Matrix::GetCol() const
 	return col_;
 }
 
-std::vector<int>::iterator& Matrix::operator[](unsigned numCol) 
+std::vector<int>::iterator& Matrix::operator[](unsigned numRow) 
 {
-	itRow_ = matrix_.begin() + (numCol * col_);
+	itRow_ = matrix_.begin() + (numRow * col_);
 	return itRow_;
 }
 

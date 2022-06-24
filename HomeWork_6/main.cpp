@@ -17,8 +17,8 @@
 
 int main()
 {
-	Matrix m1(3, 3);
-	Matrix m2(3, 3);
+	Matrix m1(10, 10);
+	Matrix m2(10, 10);
 	Matrix m3(3, 3);
 	int n = 1;
 	for (int i = 0; i < m1.GetRow(); ++i) {
@@ -71,4 +71,7 @@ int main()
 	
 	--m1;
 	std::cout << "--matrix1:\n" << m1;
+
+	m1[9][9] = 67;
+	std::cout << m1;
 }

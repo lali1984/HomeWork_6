@@ -14,7 +14,7 @@ public:
 	const int GetCol() const;
 	const std::vector<int>& GetNumbers() const;
 
-	std::vector<int>::iterator& operator[](unsigned numCol);
+	std::vector<int>::iterator& operator[](unsigned numCol);//+
 	Matrix& operator=(const Matrix& that);//+
 	Matrix& operator+=(int num);//+
 	Matrix operator+(int num);//+
